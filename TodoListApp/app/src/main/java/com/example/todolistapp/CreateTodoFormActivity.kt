@@ -93,15 +93,11 @@ class CreateTodoFormActivity : AppCompatActivity() {
                 homeFragment.arguments = bundle
                 transaction.add(R.id.homeFragment,homeFragment)
                 transaction.commit()
-                /*val intent = Intent(this,HomeFragment::class.java)
-                    intent.putExtra("Name",nameSet)
-                    intent.putExtra("Date",dateSet)
-                    intent.putExtra("Status","Incomplete")
-                startActivityForResult(intent, requestCode)*/
+     
             }else {
                 bundle?.putString("Name",nameSet)
                 bundle?.putString("Date",dateSet)
-                bundle?.putString(Status","Incomplete")
+                bundle?.putString("Status",statusSet)
                 homeFragment.arguments = bundle
                 transaction.add(R.id.homeFragment,homeFragment)
                 transaction.commit()
