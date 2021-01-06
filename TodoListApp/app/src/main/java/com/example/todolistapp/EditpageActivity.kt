@@ -59,18 +59,26 @@ class EditpageActivity : AppCompatActivity() {
             val calendar: Calendar = Calendar.getInstance()
             val currentDate:String = DateFormat.getDateInstance().format(calendar.time)
 
-            if (currentDate >= dateSet && statusSet == "Incomplete"){
-                val intent = Intent(this,HomeFragment::class.java)
-                intent.putExtra("Name",nameSet)
-                intent.putExtra("Date",dateSet)
-                intent.putExtra("Status","Incomplete")
-                startActivityForResult(intent,requestCode)
+            val manager:FragmentManager = supportFragmentManager
+            val homeFragment:HomeFragment = HomeFragment()
+            val transaction:FragmentTransaction = manager.beginTransaction()
+            val bundle:Bundle? = intent.extras
+
+            if (currentDate >= dateSet){
+                bundle?.putString("Name",nameSet)
+                bundle?.putString("Date",dateSet)
+                bundle?.putString(Status","Incomplete")
+                homeFragment.arguments = bundle
+                transaction.add(R.id.homeFragment,homeFragment)
+                transaction.commit()
+     
             }else {
-                val intent = Intent(this, HomeFragment::class.java)
-                intent.putExtra("Name", nameSet)
-                intent.putExtra("Date", dateSet)
-                intent.putExtra("Status", statusSet)
-                startActivityForResult(intent, requestCode)
+                bundle?.putString("Name",nameSet)
+                bundle?.putString("Date",dateSet)
+                bundle?.putString("Status",statusSet)
+                homeFragment.arguments = bundle
+                transaction.add(R.id.homeFragment,homeFragment)
+                transaction.commit()
             }
         }
 
