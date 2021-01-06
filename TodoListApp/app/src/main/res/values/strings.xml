@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">TodoListApplication</string>
+    <string name="actvityName">Activity Name</string>
+    <string name="deadlineDate">Deadline</string>
+    <string name="statustext">Status</string>
+    <string name="btnText">Create</string>
+    <string name="todoName">Todo</string>
+    <string name="Created">Created</string>
+    <string name="calendar">DD-MM-YYYY</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string-array name="spinner">
+        <item>Created</item>
+        <item>Pending</item>
+        <item>Done</item>
+        <item>Incomplete</item>
+    </string-array>
+    <string name="title_activity_home_screen">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Profile</string>
+    <string name="menu_slideshow">Logout</string>
+    <string name="title_activity_navbar_activity">MainActivity</string>
+    <string name="title_activity_nav_activity">NavbarActivityActivity</string>
+    <string name="title_activity_nav_drawer">MainActivity</string>
+</resources>
