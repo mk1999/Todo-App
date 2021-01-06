@@ -87,17 +87,24 @@ class CreateTodoFormActivity : AppCompatActivity() {
             val bundle:Bundle? = intent.extras
 
             if (currentDate >= dateSet){
-                val intent = Intent(this,HomeFragment::class.java)
+                bundle?.putString("Name",nameSet)
+                bundle?.putString("Date",dateSet)
+                bundle?.putString(Status","Incomplete")
+                homeFragment.arguments = bundle
+                transaction.add(R.id.homeFragment,homeFragment)
+                transaction.commit()
+                /*val intent = Intent(this,HomeFragment::class.java)
                     intent.putExtra("Name",nameSet)
                     intent.putExtra("Date",dateSet)
                     intent.putExtra("Status","Incomplete")
-                startActivityForResult(intent, requestCode)
+                startActivityForResult(intent, requestCode)*/
             }else {
-                val intent = Intent(this,HomeFragment::class.java)
-                intent.putExtra("Name",nameSet)
-                intent.putExtra("Date",dateSet)
-                intent.putExtra("Status",statusSet)
-                startActivityForResult(intent, requestCode)
+                bundle?.putString("Name",nameSet)
+                bundle?.putString("Date",dateSet)
+                bundle?.putString(Status","Incomplete")
+                homeFragment.arguments = bundle
+                transaction.add(R.id.homeFragment,homeFragment)
+                transaction.commit()
             }
         }
     }
