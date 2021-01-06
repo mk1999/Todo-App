@@ -64,11 +64,13 @@ class HomeFragment : Fragment(), TodoListAdapater.OntodoItemClickListener  {
       var name = intent?.getStringExtra("Name")
       var date = intent?.getStringExtra("Date")
       var status = intent?.getStringExtra("Status")
+      val index:Int = Random.nextInt(2)
+
       name?.let {
           date?.let {
               status?.let {
 
-                  todo.add(TodoData(name.toString(), date.toString(), status.toString()))
+                  todo.add(index,TodoData(name.toString(), date.toString(), status.toString()))
                   adapater.notifyDataSetChanged()
 
               }
