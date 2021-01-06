@@ -61,9 +61,9 @@ class TodoListAdapater(var todoList:ArrayList<TodoData>, var ontodoItemClickList
         holder.dateView.text = todo.date
         holder.statusView.text = todo.status*/
         holder.initialise(todoList.get(position), ontodoItemClickListener)
-        /*holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {
             notifyItemChanged(holder.adapterPosition)
-        }*/
+        }
     }
 
     override fun getItemCount(): Int {
