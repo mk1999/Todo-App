@@ -59,11 +59,11 @@ class EditpageActivity : AppCompatActivity() {
             val calendar: Calendar = Calendar.getInstance()
             val currentDate:String = DateFormat.getDateInstance().format(calendar.time)
 
-            if (currentDate > dateSet && statusSet == "Incomplete"){
+            if (currentDate >= dateSet && statusSet == "Incomplete"){
                 val intent = Intent(this,HomeFragment::class.java)
                 intent.putExtra("Name",nameSet)
                 intent.putExtra("Date",dateSet)
-                intent.putExtra("Status",statusSet)
+                intent.putExtra("Status","Incomplete")
                 startActivityForResult(intent,requestCode)
             }else {
                 val intent = Intent(this, HomeFragment::class.java)
