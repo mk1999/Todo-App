@@ -19,16 +19,20 @@ import kotlin.random.Random
 class MainActivity : AppCompatActivity(), TodoListAdapater.OntodoItemClickListener {
 
     private val requestCode = 1
-
+    val todo = ArrayList<TodoData>()
+    val adapater = TodoListAdapater(todo,this)
+    val binding = ActivityMainBinding.inflate(layoutInflater)
+    
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        setContentView(binding.root)
+        navigatebtn()
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportFragmentManager.beginTransaction().replace(R.id.mainActivityRecycler,HomeFragment()).commit()
+        //supportFragmentManager.beginTransaction().replace(R.id.mainActivityRecycler,HomeFragment()).commit()
 
-        getTodoList()
+        
     }
 
    /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -38,45 +42,33 @@ class MainActivity : AppCompatActivity(), TodoListAdapater.OntodoItemClickListen
         return super.onOptionsItemSelected(item)
     }*/
 
-    fun getTodoList(){
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+    fun navigatebtn(){
+        
+         binding.fabIconAdd.setOnClickListener {
+            //Toast.makeText(this,"Clicked",Toast.LENGTH_LONG).show()
+            var intent = Intent(this,CreateTodoFormActivity::class.java)
+            startActivityForResult(intent,requestCode)
+         }
 
-        val recyclerView = binding.todoListRV
-        val todo = ArrayList<TodoData>()
-        val adapater = TodoListAdapater(todo,this)
+    }
+    
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        val recyclerView = findViewById<RecyclerView>(R.id.todoListRV)
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapater
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val intent = intent
-        var name = intent.getStringExtra("Name")
-        var date = intent.getStringExtra("Date")
-        var status = intent.getStringExtra("Status")
-        val index:Int = Random.nextInt(2)
-
-        name?.let {
-            date?.let {
-                status?.let {
-                    val newItem = TodoData(name,date,status)
-                    todo.add(index,newItem)
-                    adapater.notifyDataSetChanged()
-                    /*todo.add(TodoData(name.toString(), date.toString(), status.toString()))
-                    adapater.notifyDataSetChanged()*/
-                    //TodoData(name.toString(), date.toString(), status.toString())
-                    //adapater.notifyData(todo)
-                }
+        if(data!=null) {
+            if (resultCode == RESULT_OK) {
+                var name = data!!.getStringExtra("Name")
+                var date = data!!.getStringExtra("Date")
+                var status = data!!.getStringExtra("Status")
+                todo.add(TodoData(name.toString(),date.toString(),status.toString()))
+                adapater.notifyDataSetChanged()
             }
         }
-
-        /* if (name.toString().isNotEmpty() && date.toString().isNotEmpty() && status.toString().isNotEmpty()){
-            todo.add(TodoData(name.toString(), date.toString(), status.toString()))
-        }*/
-
-        binding.fabIconAdd.setOnClickListener {
-            var intent = Intent(this, CreateTodoFormActivity::class.java)
-            startActivityForResult(intent,requestCode)
-        }
-        setContentView(binding.root)
 
     }
 
